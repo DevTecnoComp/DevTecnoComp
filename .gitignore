@@ -1,0 +1,6 @@
+/composer_cache
+/logs/apache
+/logs/php
+/src
+/src/*
+!/src/.git

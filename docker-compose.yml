@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-apache
+    volumes:
+      - ./src:/var/www/html
+      - ./logs/apache:/var/log/apache2
+      - ./logs/php:/var/log/php
+    ports:
+      - "8080:80"
+    networks:
+      - dev-network
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    working_dir: /var/www/html
+    command: bash -c "composer install && apache2-foreground"
+
+networks:
+  dev-network:
+    driver: bridge
